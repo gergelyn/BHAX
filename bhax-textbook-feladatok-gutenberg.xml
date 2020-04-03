@@ -1,0 +1,178 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Gutenberg!</title>
+        <keywordset>
+            <keyword />
+        </keywordset>
+        <cover>
+            <para>
+                Programozás tankönyvek olvasónaplói
+            </para>
+        </cover>
+    </info>
+    <section>
+        <title>Programozási alapfogalmak (PICI)</title>
+        <para>A programozási nyelvek 3 szintjét különböztetjük meg: gépi nyelv->assembly szintű
+            nyelv->magas szintű nyelvek.</para>
+        <para>
+            A forráskódot magas szintű nyelvek (amelyeket szemantikai és szintaktikai szabályok összessége határoz meg) egyikével írjuk. Ezt a kódot gépi kóddá kell alakítani, amit fordítóprogramos (pl.: C, C++) vagy interpreteres (pl.: Python) megoldással vagy mindkettővel (pl.: Java) végzünk.
+        </para>
+        <para>A fordítóprogram a gépi kóddá alakítás mellett lexikális, szintaktikai és szemantikai elemzést végez.</para>
+        <para>Az interpreteres technika nem készít tárgyprogramot, hanem sorról sorra olvassa és hajtja végre a kódot. </para>
+        <para>A programnyelvek szabványát hivatkozási nyelvnek nevezzük (ebben van definiálva a szemantikai és szintaktikai szabályok).</para>
+        <para>A szintaktika leírásához formalizmust míg a szemantika meghatározásához emberi nyelvet használnak.</para>
+        <para>Manapság IDE-k állnak rendelkezésünkre amelyek fejlesztői környezetek, ezekbe bele
+            vannak építve például a szövegszerkesztők illetve fordítók is, például a Visual Studio Code (VSCode), PyCharm, PHPStorm. </para>
+        <para>
+            Az imperatív programnyelvek közé tartoznak az algoritmikus nyelvek, amelyek működtetni fogják a processzort. A program utasítások sorozatából áll, legfontosabb eszközei a változók. Alcsoportjai az eljárásorientált és az objektumorientált nyelvek.
+        </para>
+        <para>A deklaratív programnyelvek nem kötődnek annyira a Neumann architektúrához, alcsoportjai a funkcionális nyelvek, illetve a logikai nyelvek.</para>
+        <para>A programok forrásszövegének a legkisebb alkotóelemei a karakterek.</para>
+        <para>Az adattípusok absztrakt programozási eszközök, amiket valamilyen konkrét programozási eszköz részeként használunk. 
+            Egy nyelvben általában előre vannak deklarálva a használható adattípusok (int, string, boolean...stb.), de néhány esetben lehetőség van saját létrehozására is pl.: C-ben.
+            Az adattípusokat két nagy csoportra oszthatjuk: egyszerű (pl.: egész, valós, logikai) és összetett típusúak (pl.: tömb, rekord, mutató)
+        </para>
+        <para>
+            A konstansokat akkor használjuk, ha egy értéket többször használunk egy program során és nem szeretnénk, hogy megváltozzon az adott értéke.
+        </para>
+        <para>A kifejezésekkel az adott értékeknek új értéket adunk a programban. Ezek lehetnek operandusok, változók, konstansok és függvényhívások, illetve operátorok. 
+            Szükség esetén zárüjeleket is használhatunk.
+        </para>
+        <para>Az utasítások a programozási nyelvek nélkülözhetetlen elemei. Két csoportjuk a deklarációs és végrehajtandó utasítás.</para>
+        <para>A deklarációs utasításokkal változókat, konstansokat...stb. deklarálunk.</para>
+        <para>A végrehajtandó utasításoknak több csoportja létezik, ilyen a vezérlési szerkezetet megvalósító utasítások, pl.: if, switch, goto</para>
+        <para>Másik nagyobb csoportja a ciklus utasítások, ilyen például a for, a while és a do-while ciklus is.</para>
+        <para>A program tagolása nyelvenként változik. Vannak nyelvek, amelyekben külön-külön fordítható önálló részeket írhatunk meg, míg más nyelvekben egységként kell
+            fordítanunk a kódot, illetve ezek kombinációja is létezik.
+        </para>
+        <para>Az eljárásorientált nyelvekben megjelennek az alprogramok, amelyekben megírjuk, hogy minek kell történnie és ezt a főprogramban hívjuk, ahányszor használni szeretnénk.
+            Legtöbbször függvényeket és eljárásoakt írunk az alprogramokba. 
+            Függvény deklarálásnál meghatározzuk a típusát, nevét és a kért paramétereket. Az itt deklarált változók lokálisak tehát csak a függvényben használhatóak. 
+            A rekurzió azt jelenti, hogy egy programrészben egy másik programrészt hívunk meg.
+        </para>
+        <para></para>
+        <para>A paraméterátadás a programrészek közötti kommunikáció egy módja. Két résztvevője
+            a hívó (akármilyen programrész lehet) és a hívott (csak alprogram lehet). 
+            A C-ben az érték szerinti átadást használjuk. Az érték szerinti
+            átadáskor a formális karakter megkapja az adott értéket, ilyenkor értékmásolás történik.
+            Ez csak akkor lehetséges, ha az alprogramban a formális paraméternek van címe. Az érték
+            átadódik és ezzel az alprogram a saját területén dolgozik, tehát az információ áramlás
+            csak egyirányú. Hátránya, hogy lassú lehet nagyobb adatcsoportok másolásánál. C++-ban
+            már megjelent a referencia szerinti átadás is. </para>
+        <para> A blokk egy program belsejében elhelyezkedő egység, amely tetszőleges
+            utasításokat tartalmaz. A kezdetét és végét valamilyen speciális karakter jelöli. (pl.: {} vagy {};...stb.)
+            A változóknak, konstansoknak, adatszerkezeteknek stb. hatásköre van (lokális vagy globális), ami azt jelenti, hogy a
+            program mely részein értelmezhető, végezhetők vele műveletek. Ennek beállítása 
+            statikusan és dinamikusan történhet. Statikus beállítás esetében a fordítóprogram dolgozik, végigmegy
+            a kódon és egyes programrészekre megnézi lokális-e az adott név. Ezt addig csinálja amíg
+            el nem érjük a legkülső részét a programnak. Ilyenkor kaphatunk hibát vagy deklarálódhat
+            automatikusan a név. Az ilyen módú beállításnál az adott programrészben deklarált
+            változók lokálisak. Ha nem ott deklaráltuk őket, de elérhetőek akkor pedig globálisak. A
+            dinamikus megoldásban úgynevezett hívási láncot használunk. Az deklarált változók
+            hatásköre a deklarálásuk helyének programrésze és minden olyan programrész, ami ezzel
+            hívási láncban van. Az ilyen hatáskörkezelést a futtató rendszer végzi. </para>
+        <para>Az input-output kezelés a legtöbb programozási nyelvnél más, azonban a legtöbbre jellemző, hogy középpontjában az állomány áll. 
+            Ez lehet egy fizikai és logikai rész, amelyeket funkciója szerint csoportosítjuk. Az input állományból csak olvasni lehet és
+            már létezik. Az output állomány nem létezik a létrehozása előtt és ebbe csak írni lehet.
+            Az input-output állományok ennek keveréke, lehet olvasni-írni és létezik feldolgozás
+            előtt, de a tartalmát megváltoztathatjuk. Az állományokból való munka több lépésből áll:
+            a logikai részt deklarálni kell, majd megfeleltetni a fizikai állománnyal. Ezt követően
+            tudjuk megnyitni, feldolgozni, majd lezárni. A C-ben az I/O műveletek alapból nem részei
+            a nyelvnek, standard könyvtári függvényeket használunk hozzájuk. </para>
+        <para> A kivételkezelés arra szolgál, hogy a megszakításoknak a kezelését a program szintjén
+            tudjuk végrehajtani. Egy megadott esemény után lép életbe, arra az eseményre reagálva. A
+            bizonyos kivételek kezelése letiltható és engedélyezhető. </para>
+        <para> A programok szekvenciálisak tehát sorrendben hajták végre az utasításokat.
+            Az erőforráshasználatnak megfelelően a programokat csoportosíthatjuk szálakra és
+            folyamatokra. A folyamatok csak külön-külön míg a szálak közösen birtokolhatják az adott
+            erőforrásokat. A szálak egymással kommunikálnak, időközönként találkoznak és adatcserét
+            hajthatnak végre és egymással versenyben vannak az erőforrásokért. Biztosítanunk kell,
+            hogy ne használjanak egy időben adatokat pl. az egyik változtatja a másik felveszi
+            értékül. </para>
+    </section>
+    <section>
+        <title>Programozás bevezetés (Keringhan)</title>
+        <para>
+            Megoldás videó:
+            <link xlink:href="https://youtu.be/zmfT9miB-jY">https://youtu.be/zmfT9miB-jY</link>
+        </para>
+        <para>C nyelvben a konzolra íratás a printf() függvénnyel lehetséges.</para>
+        <para>Minden változót a használata előtt deklarálni kell, ami végrehajtandó utasítások előtt történik. 
+            A deklaráció leírja a változók tulajdonságait egy típus megadásával és az adott típusú változók felsorolásával.</para>
+        <para>Az int (integer) típus az egész értékeket jelöli, pl.: 3. A float a lebegőpontos értékeket, pl.: 3.5 </para>
+        <para>További adattípusok a C nyelvben, a char (character), ami 1 byton tárol, vagy a double, ami kétszeres pontosságú float.</para>
+        <para>Ha while ciklus zárójelben lévő feltétel igaz, akkor a kapcsos zárójelben lévő kódblokk utasításai hajtódnak végre, majd ismét ellenőrzi a feltételt. 
+            Ez a ciklus addig kering, míg a feltétel hamis nem lesz.</para>
+        <para>A for ciklusra is elmondható ez a folyamat, viszont a változódeklarálás helye megváltozik.</para>
+        <para>Ezek mellett a do-while egy ellentét, mivel elsőnek lefut az itasítás, majd ellenőrzi a feltételt.</para>
+        <para>Az operátoroknak több csoportja van, például az aritmetikai operátorok (+,-,/,*,%),
+            relációs operátorok (&lt;,>,=,&lt;=,>=), valamint logikai operátorok az és &amp;&amp;
+            illetve a vagy || operátorok. Fontos még megemlíteni a bitshift &lt;&lt;= operátort
+            amelyet általában ciklusokon belül alkalmazunk. </para>
+        <para>A függvények rendelkeznek visszatérési értékkel, névvel, paraméterlistával és törzzsel. Emellett tartalmaznak egy return utasítást, 
+            amely befejezi a függvény működését, ezzel az értékkel tér vissza. Meg lehet adni visszatérés nélküli függvényt is, ami a void function.</para>
+    </section>
+    <section>
+        <title>Programozás (BME C++)</title>
+        <para>A C++ nyelv a C nyelv továbbfejlesztett változata. Tervezője Bjarne Stroustrup. Fő célja a C nyelvben bizonytalanságokat okozó megoldások helyett egy biztonságosabb
+            alternatívát nyújtson.
+        </para>
+        <para>Ha a C nyelvben egy üres paraméterlistájú függvényt deklarálunk, akkor C++-ban a függvényben egy void utasítást megadva, ekvivalens függvényt deklarálunk.</para>
+        <para>Amennyiben elhagyjuk a visszatérési típusát a függvénynek, akkor a C-ben az alapértelmezett visszatérési érték az int térne vissza, míg C++-ban hibaüzenetet dobna,
+            hiszen kötelező megadni típust.
+        </para>
+        <para>A main()-ben nem kötelező return utasítást adni, alapértelmezett, hogy 0-val tér vissza.</para>
+        <para>A C++-ban jelent meg a bool (boolean) típus, amely igaz vagy hamis lehet. C-ben ezt int vagy enum típusú kifejezésekkel lehetne reprezentáni, de 
+            ez a technika nehezebben olvashatóbb.</para>
+        <para>C++-ban ahol utasítás állhat, ott állhat változódeklaráció is. </para>
+        <para>A függvényeket C-ben a függvények nevei azonosítják, tehát 2 ugyanolyan nevű függvény
+            nem deklarálható ugyanabban a hatáskörben. C++ esetén a függvényeket a nevük illetve az
+            argumentum listájuk együttesen azonosítja a függvényeket, tehát létrehozhatunk több
+            ugyanolyan nevű függvényt amíg az argumentumlistájuk különbözik. Fontos továbbá
+            megjegyezni azt is, hogy két függvényt nem különböztethetünk meg csak visszatérési érték
+            alapján.</para>
+        <para>A C-ről C++-ra való áttérést a következő könyvtárbeli elemek segíthetik, amelyek
+            olvashatóbbak, karbantarthatóbb kódokat illetve kevesebb hibalehetőséget hordoznak
+            magukkal:</para>
+        <para>struct -> class</para>
+        <para>malloc/free -> new/delete</para>
+        <para>#define MAX 300 -> const int max = 300</para>
+        <section>
+            <title>Mobilprogramozás (Python könyv)</title>
+            <para>A Python egy interpreteres nyelv, amely az elmúlt évek során emelkedett ki, népszerűsége
+                vitathatatlan. Atyja Guido van Russom. A nyelv előnyei között van az, hogy nagyon gyorsan tanulható nyelv, mivel 
+                könnyen olvasható, hamar lehet vele komolyabb eredményeket elérni, a komplexebb
+                problémák megoldására is képes, nagy a standard könyvtára, illetve kompatibilis más
+                nyelveken megírt modulokkal. A Python akkor lehet jó választás, ha egy prototípus
+                alkalmazást szeretnénk készíteni valamilyen algoritmus vagy elmélet tesztelésére. Számos területen kiemelkedik, ilyen az automatizálás, a scrapelés, a machine learning 
+            vagy akár szerveroldalon is.</para>
+            <para>Az utasítások végét nem jelöli ; hanem a sor végéig tart.</para>
+            <para>Kommentelni a sor elejére elhelyezett # után lehet. </para>
+            <para>A változó típusát itt nem kell megadnunk, ugyanis a program futásakor kitalálja
+                a típust a hozzárendelt érték alapján.</para>
+            <para>Az adattípusok a következők lehetnek: int, float, complex, string, list, tuple, range, dict, set, forzenset, bool, bytes, bytearray, memoryview.</para>
+            <para>Változók értékadására az = jelet használjuk, változókhoz hozzárendelhetünk egy
+                objektumot, függvényt vagy akár típust. Ha nem vagyunk biztos egy már meglévő változónk típusában, a type(variable) függvénnyel kiírathatjuk.</para>
+            <para>A del kulcsszó törölhetünk egy változó hozzárendelést és a garbage collector fogja
+                elvégezni a mögöttes objektum törlését.</para>
+            <para>A print metódus használatával írathatunk ki változót a konzolra, a
+                tokenek elválasztására vesszőket alkalmazunk.</para>
+            <para>Más nyelvekhez hasonlóan itt is támogatja a Python az if elágazást, valamint jelen
+                van a for illetve while ciklus használata.</para>
+            <para>Címkéket a label kulcsszóval készíthetünk a kód egyes részeiben, a goto
+                paranccsal pedig a címkékhez tudunk ugrani a címke nevének megadásával.</para>
+            <para>A függvények deklarálására a def kulcsszót alkalmazzuk. A függvényeknek van
+                visszatérési értékük, nevük és paraméterjeik.</para>
+            <para>A Python támogatja a megszokott objektumorientált eljárásokat, tehát
+                deklarálhatunk osztályokat is, melyek példányai az objektumok valamint a függvények.
+                Az osztályok öröklődése is megtalálható a nyelvben.. Az osztályoknak lehet
+                egy speciális konstruktor tulajdonságú metódusa, az __init__. Ennek első paramétere a
+                self, vagyis maga a létrehozandó objektum. Ezentúl pedig további paramétereket is
+                várhat a konstruktor. Tehát def __init__(self, param1, param2,...):</para>
+            <para>A Python is támogatja a kivételkezeléseket. Ebben az
+                esetben a try kulcsszó után szerepel a kódblokk amelyben a kivételes helyzet
+                előállhat, majd ezt az except blokk követi, erre csakis hiba esetén kerül a
+                vezérlés.</para>
+        </section>
+    </section>
+</chapter>

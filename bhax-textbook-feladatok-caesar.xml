@@ -1,0 +1,522 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Caesar!</title>
+        <keywordset>
+            <keyword />
+        </keywordset>
+    </info>
+    <section>
+        <title>
+            <type>double **</type>
+            háromszögmátrix
+        </title>
+        <para>
+            Írj egy olyan
+            <function>malloc</function>
+            és
+            <function>free</function>
+            párost használó C programot, amely helyet foglal
+            egy alsó háromszög mátrixnak a szabad tárban!
+        </para>
+        <para>
+            Megoldás videó:
+            <link xlink:href="https://youtu.be/tqUWfbHvbOA">YouTube</link>
+        </para>
+        <para>
+            Megoldás forrása:
+            <link xlink:href="Caesar/tm.c">
+                <filename>bhax/thematic_tutorials/bhax_textbook_IgyNeveldaProgramozod/Caesar/tm.c</filename>
+            </link>
+        </para>
+        <para>A program egy alsó háromszögmátrixot fog létrehozni. Az nr (number of rows) a mátrix
+            sorainak számát tároljuk, a tm pedig egy pointerre mutató pointer, aminek lefoglalunk 8
+            bájtot a memóriában.</para>
+        <programlisting language="c">#include &lt;stdio.h>
+#include &lt;stdlib.h>
+
+int main ()
+{
+    int nr = 5;
+    double **tm;</programlisting>
+        <para>A malloc() függény lefoglal memóriát és egy pointert térít vissza. A tm-nek a malloc
+            segítségével lefoglalunk 40 bájtot, ami úgy jön ki, hogy 5 az nr és a sizeof double * 8,
+            tehát az 5*8 szorzat 40. Az if-ben megnézzük,hogy ha 0-val egyenlő a lefoglalt méret,
+            akkor vagy egy null pointert térít vissza, vagy pedig egy olyan pointert térít vissza,
+            amit át lehet adni a free függvénynek. A tm-nek a lefoglalásához használnunk kell egy
+            double** típuskényszerítést, mert alapból a malloc void*-ot ad vissza. A program le fog
+            állni, ha nincs több memória és null értéket kapunk vissza.</para>
+        <programlisting>if ((tm = (double **) malloc (nr * sizeof (double *))) == NULL)
+    {
+        return -1;
+    }</programlisting>
+        <para>Egy for ciklusban végigmegyünk az összes soron. A malloc függvény arra szolgál, hogy
+            az adott tm elemekbe betöltsük a hozzájuk tartozó memóriafoglalást, az első elem esetén
+            8 bájt. Itt szintén kell double* típuskényszerítést használni.</para>
+        <programlisting>for (int i = 0; i &lt; nr; ++i)
+  {
+      if ((tm[i] = (double *) malloc ((i + 1) * sizeof (double))) == NULL)
+      {
+          return -1;
+      }
+
+  }</programlisting>
+        <para>A dupla for ciklussal 0-tól 14-ig számokkal feltöltjük a háromszögmátrixot, amit ki is
+            íratunk.</para>
+        <programlisting>for (int i = 0; i &lt; nr; ++i)
+        for (int j = 0; j &lt; i + 1; ++j)
+            tm[i][j] = i * (i + 1) / 2 + j;
+
+    for (int i = 0; i &lt; nr; ++i)
+    {
+        for (int j = 0; j &lt; i + 1; ++j)
+            printf ("%f, ", tm[i][j]);
+        printf ("\n");
+    }</programlisting>
+        <para>Itt ebben a részben ha eltüntetjük a külső zárójelet, akkor sem fog változni a program
+            kimenete futáskor. </para>
+        <programlisting>tm[3][0] = 42.0;
+    (*(tm + 3))[1] = 43.0;	// mi van, ha itt hiányzik a külső ()
+    *(tm[3] + 2) = 44.0;
+    *(*(tm + 3) + 3) = 45.0;</programlisting>
+        <para>A program végén a memóriában felszabadítjuk a pointerek által lefoglalt helyet a free
+            függvény segítségével.</para>
+        <programlisting>for (int i = 0; i &lt; nr; ++i)
+        free (tm[i]);
+
+    free (tm);
+
+    return 0;
+}</programlisting>
+        <figure>
+            <title>
+                A
+                <type>double **</type>
+                háromszögmátrix a memóriában
+            </title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/doublecscs.png" scale="50" />
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <para></para>
+    </section>
+    <section>
+        <title>C EXOR titkosító</title>
+        <para>
+            Írj egy EXOR titkosítót C-ben!
+        </para>
+        <para>
+            Megoldás videó:
+            <link xlink:href="https://youtu.be/tqUWfbHvbOA">YouTube</link>
+        </para>
+        <para>
+            Megoldás forrása:
+            <link xlink:href="https://regi.tankonyvtar.hu/hu/tartalom/tamop412A/2011-0063_01_parhuzamos_prog_linux/ch05s02.html?fbclid=IwAR0Ob3YIHBHHRixo0g2_qYixTp93dzHlOPJe_FbqkCmIxXpFE38uxjFClzg" />
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+        <para>A kódcsipetben látható 3 függvénykönyvtárat beimportáljuk, majd definiálunk 2
+            konstansot, az egyik a maximális kulcs méretet határozza meg, a másik pedig a beolvasott
+            bájtok maximális számát jelenti.</para>
+        <programlisting>#include &lt;stdio.h>
+#include &lt;unistd.h>
+#include &lt;string.h>
+		
+#define MAX_KULCS 100 				
+#define BUFFER_MERET 256
+
+int main (int argc, char **argv)
+		{</programlisting>
+        <para>A mainben 2 char típusú tömböt deklarálunk, amelyeknek a mérete megegyezik a kulcs
+            illetve buffer értékével.</para>
+        <programlisting>char kulcs[MAX_KULCS];  
+char buffer[BUFFER_MERET];
+
+int kulcs_index = 0;
+int olvasott_bajtok = 0</programlisting>
+        <para>A kulcs_meret változóban az strlen függvény arra szolgál , hogy lekérjük a kulcs
+            hosszát. Az strncpy függvénnyel átmásoljuk a parancssori argumentumot bájtonként a
+            kulcsba.</para>
+        <programlisting>int kulcs_meret = strlen (argv[1]);
+strncpy (kulcs, argv[1], MAX_KULCS);</programlisting>
+        <para>A while cikluson belül az olvasott_bajtok változónak értékül adjuk a bufferből
+            beolvasott bájtok számát a read függvénnyel, ami a BUFFER_MÉRETnél nem lehet
+            nagyobb.</para>
+        <programlisting>while ((olvasott_bajtok = read (0, (void *) buffer, BUFFER_MERET)))
+
+{</programlisting>
+        <para>A while ciklus után következik egy for ciklus amely 0-tól egészen elmegy az olvasott
+            bájtokig, majd vesszük a buffer adott bájtjának illetve a kulcs adott bájtjának exorát.
+            Annak érdekében, hogy jobb legyen a titkosítás, a kulcsindexet átírjuk az adott
+            indexmérettel való maradékos osztásra minden bájt után.</para>
+        <programlisting>for (int i = 0; i &lt; olvasott_bajtok; ++i)
+{
+
+	buffer[i] = buffer[i] ^ kulcs[kulcs_index];
+	kulcs_index = (kulcs_index + 1) % kulcs_meret;
+
+}</programlisting>
+        <para>Végül a write függvény segítségével a titkosított szöveget beírjuk bájtonként a
+            bufferba az olvasott bájtokig.</para>
+        <programlisting>write (1, buffer, olvasott_bajtok);
+
+}
+
+}</programlisting>
+    </section>
+    <section>
+        <title>Java EXOR titkosító</title>
+        <para>
+            Írj egy EXOR titkosítót Java-ban!
+        </para>
+        <para>
+            Megoldás videó:
+            <link xlink:href="https://youtu.be/tqUWfbHvbOA">YouTube</link>
+        </para>
+        <para>
+            Megoldás forrása:
+            <link xlink:href="https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/ch01.html#exor_titkosito">https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/ch01.html#exor_titkosito</link>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+        <para>A Java és a C titkosító között nincs különbség. A program egy osztályba fog kerülni, ami az ExorTitkosító. A titkosítás pedig az ExorTitkosító függvénybe fog kerülni, aminek a paramétereiÉ string (a kulcs), és az input output csatornák. A getBytes függvény átalakítja byteok tömbjére a kulcsszöveget. A titkosított szöveget a kimenoCsatorna.write-tal írjuk a megadott output fileba. A read függvény pedig beolvassa a megadott input fileból az olvasott byteokat.</para>
+        <programlisting>public class ExorTitkosító {
+    
+    public ExorTitkosító(String kulcsSzöveg,
+            java.io.InputStream bejövőCsatorna,
+            java.io.OutputStream kimenőCsatorna)
+            throws java.io.IOException {
+        
+        byte [] kulcs = kulcsSzöveg.getBytes();
+        byte [] buffer = new byte[256];
+        int kulcsIndex = 0;
+        int olvasottBájtok = 0;
+
+        while((olvasottBájtok =
+                bejövőCsatorna.read(buffer)) != -1) {
+            
+            for(int i=0; i&lt;olvasottBájtok; ++i) {
+                
+                buffer[i] = (byte)(buffer[i] ^ kulcs[kulcsIndex]);
+                kulcsIndex = (kulcsIndex+1) % kulcs.length;
+                
+            }
+            
+            kimenőCsatorna.write(buffer, 0, olvasottBájtok);
+            
+        }
+        
+    }
+    
+    public static void main(String[] args) {
+        
+        try {
+            
+            new ExorTitkosító(args[0], System.in, System.out);
+            
+        } catch(java.io.IOException e) {
+            
+            e.printStackTrace();
+            
+        }
+        
+    }
+    
+}</programlisting>
+    </section>
+    <section xml:id="bhax-textbook-feladatok-caesar.EXOR-toro">
+        <title>C EXOR törő</title>
+        <para>
+            Írj egy olyan C programot, amely megtöri az első feladatban előállított titkos szövegeket!
+        </para>
+        <para>
+            Megoldás videó:
+            <link xlink:href="https://youtu.be/tqUWfbHvbOA">YouTube</link>
+        </para>
+        <para>
+            Megoldás forrása:
+            <link xlink:href="https://gitlab.com/misi1201/bhax/-/blob/master/thematic_tutorials/Caesar%20feladatok/t.c" />
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+        <para>A program elején beimportáljuk a megfelelő header fájlokat, illetve definiáljuk a
+            szükséges konstansokat.</para>
+        <programlisting>#define MAX_TITKOS 4096
+#define OLVASAS_BUFFER 256
+#define KULCS_MERET 8
+#define _GNU_SOURCE
+
+#include &lt;stdio.h>
+#include &lt;unistd.h>
+#include &lt;string.h></programlisting>
+        <para>Az atlagos_szohossz függvényben elosztjuk a szóközök számával a titkos szöveg méretét
+            bájtokban, így megkapjuk, hogy egy szó hány bájtos átlagosan.</para>
+        <programlisting>double atlagos_szohossz (const char *titkos, int titkos_meret)
+	{
+		int sz = 0;
+		for (int i = 0; i &lt; titkos_meret; ++i)
+			if (titkos[i] == ' ')
+				++sz;
+
+		return (double) titkos_meret / sz;
+	}</programlisting>
+        <para>A tiszta_lehet függvényben azt állapítjuk meg, hogy a szövegben szerepelnek-e a
+            leggyakoribb magyar szavak, amik: hogy,nem,ha,az. Továbbá megnézzük azt is, hogy 6
+            illetve 9 között van-e az átlag szóhossz. Ezeket a lépéseket a returnben hajtjuk végre
+            az &amp;&amp; (és) operátorok segítségével. Így képesek vagyunk a potenciális törések
+            számát csökkenteni.</para>
+        <programlisting>int tiszta_lehet (const char *titkos, int titkos_meret)
+	{
+		double szohossz = atlagos_szohossz (titkos, titkos_meret);
+			
+		return szohossz > 6.0 &amp;&amp; szohossz &lt; 9.0
+		&amp;&amp; strcasestr (titkos, "hogy") &amp;&amp; strcasestr (titkos, "nem")
+		&amp;&amp; strcasestr (titkos, "az") &amp;&amp; strcasestr (titkos, "ha");
+	}</programlisting>
+        <para>Az exor függvényben a for cikluson belül átvizsgáljuk a titkos szöveget és ennek a
+            szövegnek a bájtjait exorozzuk a kulcsindexxel. A kulcsindexet növeljük mindig 1-el ,
+            majd pedig maradékosan osztjuk a kulcs méretével. Ennek következtében a kulcs_index
+            mindig 0-ról fog indulni és akkor is ki fog nullázódni, ha eléri a kulcs_meret
+            konstansot.</para>
+        <programlisting>void exor (const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret)
+	{
+		int kulcs_index = 0;
+		for (int i = 0; i &lt; titkos_meret; ++i)
+		{
+		titkos[i] = titkos[i] ^ kulcs[kulcs_index];
+		kulcs_index = (kulcs_index + 1) % kulcs_meret;
+		}
+		}</programlisting>
+        <para>Az exor_tores függvényben az exor függvény meghívásra kerül , illetve a returnben a
+            tiszta_lehet függvény.  Ez a függvény azt nézi, hogy sikeres volt-e a törés.</para>
+        <programlisting>int exor_tores (const char kulcs[], int kulcs_meret, char titkos[],int titkos_meret)
+	{
+		exor (kulcs, kulcs_meret, titkos, titkos_meret);
+		return tiszta_lehet (titkos, titkos_meret);
+	}</programlisting>
+        <para>A main függvényben 2 tömböt hozunk létre, az egyik a kulcsokat, a másik a titkos
+            szöveget fogja tárolni. Deklarálunk még egy p pointert , amely a titkos szöveg első
+            karakterére mutat. A while ciklusban a read függvény segítségével az olvasott bájtok
+            számát betöltjük az olvasott_bajtok változóba. A read függvények paraméterei a 0, vagyis
+            hogy a standard inputról fogjuk beolvasni a szöveget , azután hogy hol tároljuk a
+            szöveget amit beolvasunk és mekkora az a maximális méret amit beolvas. Abban az esetben,
+            ha a titkos szöveg és p különbségének a buffer bájtszámával vett összege kisebb, mint a
+            titkos szöveg maximális bájt száma, akkor a bufferig olvassa be a bájtokat. Viszont ha
+            nagyobb, akkor a titkos szöveg + 4096 bájt - p -ig olvassa be a bájtokat. Ha kész van a
+            beolvasás, akkor az utolsó beolvasott bájt memóriacímét értékül adjuk p-nek.</para>
+        <programlisting>int main (void)
+{
+
+	char kulcs[KULCS_MERET];
+	char titkos[MAX_TITKOS];
+	char *p = titkos;
+	int olvasott_bajtok;
+			
+	while ((olvasott_bajtok = read (0, (void *) p,
+(p - titkos + OLVASAS_BUFFER &lt; MAX_TITKOS) ? OLVASAS_BUFFER : titkos + MAX_TITKOS - p)))
+		p += olvasott_bajtok;</programlisting>
+        <para>A szövegben ahol nincsen semmi, ott kinullázzuk azokat a helyeket a titkos szövegben a
+            for ciklus segítségével.</para>
+        <programlisting>for (int i = 0; i &lt; MAX_TITKOS - (p - titkos); ++i)
+      titkos[p - titkos + i] = '\0';</programlisting>
+        <para>A lehetséges kulcsokat a for ciklussal előállítjuk , majd ha az exor törés függvénnyel
+            kipróbáljuk őket és ha igazat ad akkor készen vagyunk. Ha sikertelen volt a törés, akkor
+            az eredeti szöveget visszafejtjük és próbálkozunk újra.</para>
+        <programlisting>for (int ii = '0'; ii &lt;= '9'; ++ii)
+	for (int ji = '0'; ji &lt;= '9'; ++ji)
+		for (int ki = '0'; ki &lt;= '9'; ++ki)
+			for (int li = '0'; li &lt;= '9'; ++li)
+				for (int mi = '0'; mi &lt;= '9'; ++mi)
+					for (int ni = '0'; ni &lt;= '9'; ++ni)
+						for (int oi = '0'; oi &lt;= '9'; ++oi)
+							for (int pi = '0'; pi &lt;= '9'; ++pi)
+							{
+							kulcs[0] = ii;
+							kulcs[1] = ji;
+							kulcs[2] = ki;
+							kulcs[3] = li;
+							kulcs[4] = mi;
+							kulcs[5] = ni;
+							kulcs[6] = oi;
+							kulcs[7] = pi;
+
+
+
+                                 if (exor_tores (kulcs, KULCS_MERET, titkos, p - titkos))
+                                     printf
+                                     ("Kulcs: [%c%c%c%c%c%c%c%c]\nTiszta szoveg: [%s]\n",
+                                      ii, ji, ki, li, mi, ni, oi, pi, titkos);
+
+                                
+                                 exor (kulcs, KULCS_MERET, titkos, p - titkos);
+                             }
+
+return 0;
+}</programlisting>
+    </section>
+    <section>
+        <title>Neurális OR, AND és EXOR kapu</title>
+        <para>
+            R
+        </para>
+        <para>
+            Megoldás videó:
+            <link xlink:href="https://youtu.be/tqUWfbHvbOA">YouTube</link>
+        </para>
+        <para>
+            Megoldás forrása:
+            <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/NN_R">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/NN_R</link>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+        <para>Ha a bemeneti értékek súlyozott összege (minden számnak van egy súlyértéke) egy bizonyos határértéket meghalad, akkor indul el a program.</para>
+        <para>A programban meghívjuk a neuralnet könyvtárat.  A neuronok lehetséges értékeit a1
+            illetve a2-be betöltjük, az OR-ba pedig ezek logikai 'vagy' műveletének értékét, majd elmondjuk az összes lehetséges esetet. A program képes lesz
+            magát tanítani, és a súlyokat beállítja magának. Ugyanilyen módon megtanítjuk neki az
+            'és' illetve 'exor' műveleteket. Exor esetében minél több a rejtett neuronok száma,
+            annál hatékonyabb a tanulási algoritmus.</para>
+        <programlisting>#   Copyright (C) 2019  Dr. Norbert Bátfai, nbatfai@gmail.com
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/>
+#
+# https://youtu.be/Koyw6IH5ScQ
+		
+library(neuralnet)
+
+a1    &lt;- c(0,1,0,1)
+a2    &lt;- c(0,0,1,1)
+OR    &lt;- c(0,1,1,1)
+
+or.data &lt;- data.frame(a1, a2, OR)
+
+nn.or &lt;- neuralnet(OR~a1+a2, or.data, hidden=0, linear.output=FALSE, stepmax = 1e+07, threshold = 0.000001)
+
+plot(nn.or)
+
+compute(nn.or, or.data[,1:2])
+
+
+a1    &lt;- c(0,1,0,1)
+a2    &lt;- c(0,0,1,1)
+OR    &lt;- c(0,1,1,1)
+AND   &lt;- c(0,0,0,1)
+
+orand.data &lt;- data.frame(a1, a2, OR, AND)
+
+nn.orand &lt;- neuralnet(OR+AND~a1+a2, orand.data, hidden=0, linear.output=FALSE, stepmax = 1e+07, threshold = 0.000001)
+
+plot(nn.orand)
+
+compute(nn.orand, orand.data[,1:2])
+
+
+
+a1      &lt;- c(0,1,0,1)
+a2      &lt;- c(0,0,1,1)
+EXOR    &lt;- c(0,1,1,0)
+
+exor.data &lt;- data.frame(a1, a2, EXOR)
+
+nn.exor &lt;- neuralnet(EXOR~a1+a2, exor.data, hidden=0, linear.output=FALSE, stepmax = 1e+07, threshold = 0.000001)
+
+plot(nn.exor)
+
+compute(nn.exor, exor.data[,1:2])
+
+
+a1      &lt;- c(0,1,0,1)
+a2      &lt;- c(0,0,1,1)
+EXOR    &lt;- c(0,1,1,0)
+
+exor.data &lt;- data.frame(a1, a2, EXOR)
+
+nn.exor &lt;- neuralnet(EXOR~a1+a2, exor.data, hidden=c(6,4,6), linear.output=FALSE, stepmax = 1e+07, threshold = 0.000001)
+
+plot(nn.exor)
+
+compute(nn.exor, exor.data[,1:2])</programlisting>
+    </section>
+    <section>
+        <title>Hiba-visszaterjesztéses perceptron</title>
+        <para>
+            C++
+        </para>
+        <para>
+            Megoldás videó:
+            <link xlink:href="https://youtu.be/tqUWfbHvbOA">YouTube</link>
+        </para>
+        <para>
+            Megoldás forrása:
+            <link xlink:href="https://github.com/nbatfai/nahshon/blob/master/ql.hpp#L64">https://github.com/nbatfai/nahshon/blob/master/ql.hpp#L64</link>
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+        <para>Létrehozzuk a képet, aminek a mérete bekerül a size változóba, majd a
+            magasságát összeszorozzuk a szélességével. A magasság illetve szélesség lekérésére a
+            get_width illetve get_height függvényt használjuk. </para>
+        <para>Csinálunk egy perceptron objektumot memóriakezelésre, aminek 3 rétege van:</para>
+        <para>Az első rétegbe annzi neuron kerül, amekkora a kép mérete, a második rétegbe
+            256, majd a harmadik rétegbe 1 neuron kerül (utóbbi az eredménynek lesz lefoglalva)</para>
+        <para>A double* imageben a képnek helyetfoglalunk és feltöltjük a beolvasott képpel egy
+            dupla for ciklussal (egyik a szélesség, másik a magasság miatt). A betöltésnél csak a piros színkódú komponensek töltődnek be a képbe. Ezután
+            a perceptront, mint függvényt használjuk az eredmény értékadásánál. A program végén a
+            delete függvényekkel szabadítjuk fel a pointerek és a kép által lefoglalt
+            memóriát.</para>
+        <programlisting>#include &lt;iostream>
+#include "mlp.hpp"{
+#include &lt;png++/png.hpp>
+
+int main(int argc, char **argv){
+png::image &lt;png::rgb_pixel> png_image (argv[1]);
+	
+int size = png_image.get_width()*png_image.get_height();
+
+Perceptron *p = new Perceptron(3, size, 256, 1);
+
+double* image = new double[size];
+
+for(int i(0);i&lt;png_image.get_width(); ++i)
+	for(int j(0);j&lt;png_image.get_height(); ++j)
+		image[i*png_image.get_width()+j] = png_image[i][j].red;
+
+
+double value = (*p)(image);
+
+std::cout&lt;&lt; value &lt;&lt; std::endl;
+
+	
+
+delete p;
+delete [] image;
+}
+        </programlisting>
+    </section>
+    <section>
+        <title>MALMO</title>
+        <para>
+            Megoldás forrása:
+            <link xlink:href="">Github</link>
+        </para>
+        <para>
+            Megoldás videó:
+            <link xlink:href="https://youtu.be/1FaijgwIiwk">YouTube</link>
+        </para>
+    </section>
+</chapter>
