@@ -2,7 +2,7 @@
     <info>
         <title>Helló, Welch!</title>
         <keywordset>
-            <keyword/>
+            <keyword />
         </keywordset>
     </info>
     <section>
@@ -22,8 +22,169 @@
         <para>
             Tanulságok, tapasztalatok, magyarázat... térj ki arra is, hogy a JDK forrásaiban a Sun programozói
             pont úgy csinálták meg ahogyan te is, azaz az OO nemhogy nem nehéz, hanem éppen természetes neked!
-        </para>                
-    </section>        
+        </para>
+        <para>A program két fô komponensbôl áll: polargenteszt.cpp, ami tartalmazza a main() -t és includeolja az iostream könyvtárat (amely a standard in és outputért felel), illetve a polargen.h header filet.</para>
+        <para>polargenteszt.cpp tartalma</para>
+        <programlisting language="c">
+            <![CDATA[	
+		
+// https://sourceforge.net/p/udprog/code/ci/master/tree/source/labor/polargen/polargenteszt.cpp
+#include <iostream>
+#include "polargen.h"
+            
+int main (int argc, char **argv)
+{
+    PolarGen pg; // PolarGen osztályhoz tartozó példány készítése
+            
+    for (int i = 0; i < 10; ++i) // for ciklus, amely 10x fut le
+    {
+        std::cout << pg.kovetkezo () << std::endl; // minden ciklusban írjon ki egy random számot a pg.kovetkezo() függvénnyel
+    }
+            
+    return 0;
+}
+            
+]]>
+        </programlisting>
+        <para>polargen.h tartalma</para>
+        <programlisting language="c">
+            <![CDATA[	
+		
+// https://sourceforge.net/p/udprog/code/ci/master/tree/source/labor/polargen/polargen.h
+
+#ifndef POLARGEN__H
+#define POLARGEN__H
+            
+#include <cstdlib>      // Általános célú függvényeket tartalmazó könyvtár
+#include <cmath>        // Matematikai mûveletek és transzormációk kiszámítására használatos függvényeket tartalmazó könyvtár
+#include <ctime>        // Az idô adat kinyerésére és manipulálására használatos függvényeket tartalmazó könyvtár
+            
+class PolarGen
+{
+public:
+    PolarGen()     // PolarGen osztály konstruktora, a tárolt adatot ellenôrzi, hogy van-e
+    {
+        nincsTarolt = true;
+        std::srand (std::time (NULL));
+    }
+    ~PolarGen()    // PolarGen osztály destruktora, a memória felszabadítás miatt
+    {
+    }
+    double kovetkezo();
+            
+private:
+    bool nincsTarolt;
+    double tarolt;
+            
+};
+            
+#endif
+            
+            
+        ]]>
+        </programlisting>
+        <para>A matematikai számításokat az alábbi kód végzi. Ellenôrzi, hogy van-e tárolt random szám, ha van visszaadja, ha nincs akkor új random számot generál.</para>
+        <programlisting language="c">
+            <![CDATA[	
+		
+// https://sourceforge.net/p/udprog/code/ci/master/tree/source/labor/polargen/polargen.cpp
+            
+#include "polargen.h"
+            
+double PolarGen::kovetkezo ()
+{
+    if (nincsTarolt)
+    {
+        double u1, u2, v1, v2, w;
+        do
+        {
+            u1 = std::rand () / (RAND_MAX + 1.0);
+            u2 = std::rand () / (RAND_MAX + 1.0);
+            v1 = 2 * u1 - 1;
+            v2 = 2 * u2 - 1;
+            w = v1 * v1 + v2 * v2;
+        }
+        while (w > 1);
+            
+        double r = std::sqrt ((-2 * std::log (w)) / w);
+            
+        tarolt = r * v2;
+        nincsTarolt = !nincsTarolt;
+            
+        return r * v1;
+    }
+    else
+    {
+        nincsTarolt = !nincsTarolt;
+        return tarolt;
+    }
+}
+            
+            
+]]>
+        </programlisting>
+        <para>A Java PolarGen</para>
+        <para>Ami elsôre furcsa, hogy nem található destruktor és minden érték public, nincs private. Emellett a kifejezés a kezdetektôl igaz.</para>
+        <programlisting language="c">
+            <![CDATA[
+//A program forrása: Bátfai Norbert, Juhász István: Javát tanítok könyv 57. o. 
+		
+		
+public class Random {		// Random osztály létrehozása
+	
+    boolean exist = true;	// Van korábbi érték
+	double value;		// Az érték
+
+	public Random() {	// Konstruktor létrehozása
+
+		exist = true;
+
+	}
+
+	public double get() {	// Get függvény létrehozása
+
+		if(exist) { // Ha létezik
+
+			double u1,u2,v1,v2,w;
+			do {	// Az algoritmus kezdete
+				u1 = Math.random();
+				u2 = Math.random();
+
+			    v1 = 2*u1 - 1;
+				v2 = 2*u2 - 1;
+
+				w = v1*v1 + v2*v2;
+			}
+
+			while(w>1);
+
+			double r = Math.sqrt((-2*Math.log(w)/w));
+
+			value = r*v2;
+			exist = !exist;
+			
+			return r*v1; 
+			//Az algoritmus vége
+		} else { 
+			exist= !exist;
+			return value;
+		}
+	}
+	
+	public static void main(String[] args) {
+
+		Random g = new Random();
+
+		for(int i=0;i<10;++i) {
+			System.out.println(g.get());
+        }
+	}
+}
+
+]]>
+        </programlisting>
+
+    </section>
 
     <section>
         <title>LZW</title>
@@ -36,8 +197,9 @@
         <para>
             Megoldás forrása:                
         </para>
-    </section>        
-        
+        <para>Megoldás a fejezet 6. pontjában aggregálva</para>
+    </section>
+
     <section>
         <title>Fabejárás</title>
         <para>
@@ -49,8 +211,9 @@
         <para>
             Megoldás forrása:                
         </para>
-    </section>        
-                        
+        <para>Megoldás a fejezet 6. pontjában aggregálva</para>
+    </section>
+
     <section>
         <title>Tag a gyökér</title>
         <para>
@@ -63,8 +226,9 @@
         <para>
             Megoldás forrása:                
         </para>
-    </section>        
-                
+        <para>Megoldás a fejezet 6. pontjában aggregálva</para>
+    </section>
+
     <section>
         <title>Mutató a gyökér</title>
         <para>
@@ -77,7 +241,8 @@
         <para>
             Megoldás forrása:  
         </para>
-    </section>                     
+        <para>Megoldás a fejezet 6. pontjában aggregálva</para>
+    </section>
 
     <section>
         <title>Mozgató szemantika</title>
@@ -91,6 +256,325 @@
         <para>
             Megoldás forrása:  
         </para>
-    </section>                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-</chapter>                
+        <para>Ez a program egy template osztályú Objektum Orientált binfa. A template osztály a különbözô típusú bemenetek felépítése miatt van.</para>
+        <para>A gyerekosztály (Node) örökli az ôsosztály (BinTree) protected értékadásait.</para>
+        <para>A Node osztály a levelekért felel, a private értékadásaiban találhatóak a bal és jobb oldali referenciák, értékek és a mélység meghatározása, 
+            amelyet a count{0} végez (0-val van inicializálva). Itt található a másoló és mozgató konstruktor is.</para>
+        <para>A public részében az értékeket töltjük fel a meghívott értékekkel a konstrukturára vonatkozóan,
+            a pointereket pedig nullra állítjuk a nullptr segítségével. Itt találhatóak még a bejáráshoz szükséges függvények.</para>
+        <programlisting language="c">
+            <![CDATA[
+#include <iostream>
+            
+template <typename ValueType>
+class BinTree
+{  
+protected:  // a protectedben örököl a Node gyerekosztály a BinTree ôsosztálytól
+    class Node  // A Node osztály létrehozása
+    {
+    private:    // A Node osztály privát tagjai
+        ValueType value;	// ValueType típussal lesz meghívva a value
+        Node *left;         // Bal oldali gyerek
+        Node *right;        // Jobb oldali gyerek
+        int count{0};		// count 0-val inicializálva
+            
+        //TODO rule of five (ha egy osztályban pointer van akkor biztos hogy kell destruktor, plusz a másoló és mozgató konstruktor privatera van tiltva)
+        Node(const Node &);	                // Node másoló konstruktor const bal érték referenciával		
+        Node &operator=(const Node &);		// const Node referenciát ad vissza, másoló értékadás	
+        Node(Node &&);						// Node mozgató konstruktor const jobb érték referenciával
+        Node &operator=(Node &&);	        // const Node referenciát ad vissza, mozgató értékadás
+    public:
+        // A konstruktor, ami megkap egy valuet (ValueType value), es ezt feltölti a paraméterkent kapott valueba : value(value)
+        // Itt van még a bal oldali részfára mutató pointer a left(nullptr)
+        // A jobb oldali részfára mutató pointer right(nullptr)
+		Node(ValueType value): value(value), left(nullptr), right(nullptr) {}  
+        ValueType getValue()
+        {
+            return value;
+        }
+        Node *leftChild()   // getter
+        {
+            return left;
+        }
+        Node *rightChild()  // getter
+        {
+            return right;
+        }
+        void leftChild(Node *node)  // setter
+        {
+            left = node;
+        }
+        void rightChild(Node *node) // setter
+        {
+            right = node;
+        }
+        int getCount()
+        {
+            return count;
+        }
+        void incCount()
+        {
+            count++;
+        }
+
+	};
+
+	Node *root;     // A gyökér kompozícióba van a fával, tagként mutatóval
+	Node *treep;    // A fa pointer
+	int depth{0};   // A fa mélysége
+   
+]]>
+        </programlisting>
+        <para>A BinTree private részében található a másoló és mozgató konstruktor, a publikusban pedig a destruktor ~BinTree(), amely a memóriafelszabadításért felel.</para>
+
+        <programlisting language="c">
+            <![CDATA[
+private:
+    //TODO rule of five (ha egy osztályban pointer van akkor biztos hogy kell destruktor, plusz a másoló és mozgató konstruktor privatera van tiltva)
+    BinTree(const BinTree &);               // BinTree másoló konstruktor const bal érték referenciával		
+    BinTree &operator=(const BinTree &);    // const BinTree referenciát ad vissza, másoló értékadás	
+    BinTree(const BinTree &&);              // BinTree mozgató konstruktor const jobb érték referenciával
+    BinTree &operator=(BinTree &&);         // const BinTree referenciát ad vissza, mozgató értékadás	
+            
+public:
+    // A fa konstruktura
+    // Az osztálynak a root tagjába tegye a paraméterként kapott root -ot :root(root)
+    // A treep -be tegye a paraméterként kapott treepointert ,treep(treep)
+    BinTree(Node *root = nullptr, Node *treep = nullptr):root(root), treep(treep){}
+    ~BinTree()
+    {
+        deltree(root);
+    }	
+    // A ValueType value -t akarjuk beshiftelni
+    BinTree & operator<<(ValueType value);  		
+    void print(){print(root,std::cout);}
+    void print(Node * node, std::ostream & os);		
+    void deltree(Node * node);
+            
+};
+            
+            
+]]>
+        </programlisting>
+        <para>Az operátor függvény végzi a gyökér létezésének ellenôrzését. Ha létezik, akkor figyelmen kívül marad a feltétel, ha nem, létrehoz egyet.
+            Ellenôrzi a bal és jobb oldali gyermek létezését, ha nincs akkor létrehozza ôket, ha van, akkor a megfelelô helyre illeszti az aktuális értéket
+        </para>
+        <programlisting language="c">
+            <![CDATA[
+
+template <typename ValueType>
+class ZLWTree : public BinTree<ValueType> 
+{			/*Kiterjesztjuk a BinTree osztalyt, ez lesz a mienk. A valuetype altal meghivhato lesz bamilyen tipussal*/
+public:
+    ZLWTree(): BinTree<ValueType>(new typename BinTree<ValueType>::Node('/')) 
+    {	/*:: hatókör operátor....hivjuk az ősosztaly konstruktorat, es annak atadok egy ropteben csinalt rootot, es berakja a rootba a root ertekbe*/
+        this->treep = this->root;				/*a this pointer arra szolgal, ha pl publicba hivunk meg egy fvt, ami a private ertekkel dolgozik*/
+    }
+    ZLWTree & operator<<(ValueType value);
+};	
+            
+// A binfa építése
+// Az alábbi függvény végzi a gyökér elkészítését (ha nem létezik), 
+// a jobb és bal oldali gyermekek elkészítését (ha nem léteznek),
+// és az értékek megfelelô helyre való shiftelését
+template <typename ValueType>
+BinTree<ValueType> & BinTree<ValueType>::operator<<(ValueType value)
+{
+    if(!treep) // Ha nem létezik a tree pointer
+    {         
+        root = treep = new Node(value); // Készít egy Nodeot a valueval amit a mainbe fogok meghívni
+    } else if (treep->getValue() == value)  // Ha létezik és az értékek egyeznek
+    {
+        treep->incCount();  // A számláló növelô függvény hívása
+    } else if (treep->getValue() > value)   // Ha létezik és a treep értéke nagyobb
+    {
+        if(!treep->leftChild()) // Ha nincs baloldali gyermek
+        {
+            treep->leftChild(new Node(value));  // Készít egyet és az értéket beleshifteli
+        } 
+        else    // Ha létezik
+        {
+            treep = treep->leftChild();
+            *this << value; // Újrahívom rekurzívan ezt az eltolást, ezt az if-else csekkolást
+        }
+                    
+    } else if (treep->getValue() < value) { // Ha létezik és a treep értéke kisebb
+        if(!treep->rightChild()) // Ha nincs jobboldali gyermek
+        {
+            treep->rightChild(new Node(value)); // Készít egyet és az értéket beleshifteli
+        } 
+        else    // Ha létezik
+        {
+            treep = treep->rightChild();
+            *this << value; // Újrahívom rekurzívan ezt az eltolást, ezt az if-else csekkolást
+        }
+                    
+    }
+                
+    treep = root;
+                
+    return *this;   // Vissza adja a referenciát az objektumra, azaz az aktuális fára
+}
+            
+            
+// A ZLW fa epítése		
+// Az alábbi függvény végzi az értékek megfelelô helyre való shiftelését
+template <typename ValueType>
+ZLWTree<ValueType> & ZLWTree<ValueType>::operator<<(ValueType value)
+{
+                
+    if(value == '0') 
+    {
+        if(!this->treep->leftChild()) 
+        {
+            typename BinTree<ValueType>::Node * node = new typename BinTree<ValueType>::Node(value);
+            this->treep->leftChild(node);
+            this->treep = this->root;           
+        } 
+        else 
+        {
+            this->treep = this->treep->leftChild(); 
+        }
+                    
+    } 
+    else 
+    {
+        if(!this->treep->rightChild()) 
+        {
+            typename BinTree<ValueType>::Node * node = new typename BinTree<ValueType>::Node(value);
+            this->treep->rightChild(node);
+            this->treep = this->root;       
+        } 
+        else 
+        {
+            this->treep = this->treep->rightChild(); 
+        }
+                    
+    }
+                
+    return *this;   // Vissza adja a referenciát az objektumra, azaz az aktuális fára
+}
+]]>
+        </programlisting>
+        <para>
+            Ezt követôen a fa kiíratásra kerül, majd a töröljük a memòriából, és az értékeket a fába shifteljük.
+        </para>
+        <programlisting language="c">
+            <![CDATA[
+// A fa kiíratása
+template <typename ValueType>
+void BinTree<ValueType>::print(Node *node, std::ostream & os) 
+{
+    if(node)
+    {
+        depth++;
+        print(node->leftChild(), os);
+                    
+        for(int i{0}; i<depth; i++) {
+            os << "---";  
+        }          
+        os << node->getValue() << " " << depth << " " << node->getCount() << std::endl;             
+        print(node->rightChild(), os);
+        depth--;
+    }        
+}
+
+// A fa törlése
+template <typename ValueType>
+void BinTree<ValueType>::deltree(Node *node) 
+{
+    if(node)
+    {
+        deltree(node->leftChild());     // A baloldali gyerek törlése
+        deltree(node->rightChild());    // A jobboldali gyerek törlése
+                    
+        delete node;                    // A node törlése
+    }
+                
+}
+            
+                
+    
+int main(int argc, char** argv, char ** env)
+{
+    BinTree<int> bt;          
+    bt << 8 << 9 << 5 << 2 << 7;            
+    bt.print();            
+    std::cout << std::endl;  /*<< bele shiftelunk, definialtuk az operatort , fent a binfa publicba*/       
+    ZLWTree<char> zt;        
+    zt <<'0'<<'1'<<'1'<<'1'<<'1'<<'0'<<'0'<<'1'<<'0'<<'0'<<'1'<<'0'<<'0'<<'1'<<'0'<<'0'<<'0'<<'1'<<'1'<<'1';            
+    zt.print();        
+}
+]]>
+        </programlisting>
+        <para>A z3a18qa5.cpp másoló és mozgató szemantikája</para>
+        <programlisting>
+            <![CDATA[
+public:
+    BinRandTree(Node *root = nullptr, Node *treep = nullptr): root(root), treep(treep) 
+    {
+        std::cout << "BT ctor" << std::endl;        
+    }
+                
+    BinRandTree(const BinRandTree & old) 
+    {
+        std::cout << "BT copy ctor" << std::endl;
+        root = cp(old.root, old.treep);   
+    }
+                
+    Node * cp(Node *node, Node *treep) 
+    {
+        Node * newNode = nullptr;
+        if(node)
+        {
+            newNode = new Node(node->getValue(), 42 /*node->getCount()*/);
+                        
+            newNode->leftChild(cp(node->leftChild(), treep));            
+            newNode->rightChild(cp(node->rightChild(), treep));
+                        
+            if(node == treep)
+            {
+                this->treep = newNode;
+            }
+        }      
+        return newNode;
+    }
+                
+    BinRandTree & operator=(const BinRandTree & old) 
+    {
+        std::cout << "BT copy assign" << std::endl;
+        BinRandTree tmp{old};
+        std::swap(*this, tmp);
+        return *this;
+    }
+                
+    BinRandTree(BinRandTree && old) 
+    {
+        std::cout << "BT move ctor" << std::endl;
+        root = nullptr;
+        *this = std::move(old);
+    }
+                   
+    BinRandTree & operator=(BinRandTree && old) 
+    {
+        std::cout << "BT move assign" << std::endl;
+        std::swap(old.root, root);
+        std::swap(old.treep, treep);
+                    
+        return *this;
+    }
+]]>
+        </programlisting>
+        <para>A BT ctor konstruktor a mainben jön létre a fa létrehozásakor. A másoló értékadást egyenlôségadással kell meghívni.
+            A BT copy assign kiíratásas után a bemeneti érték egy tmp fába lesz elmentve, majd pedig meg lesznek cserélve az értékek.
+            Ezt követôen a destruktor megszünteni a tmp értékét. A másoló konstruktor meghívására kiíratódik a BT copy ctor és meghívjuk
+            a mozgató konstruktort. A másoló értékadás ezen belül kerül meghívásra és kiírjuk a BT move assignt. A mozgató értékadásra rákerül
+            a másoló konstruktor és a program leállása a destruktorok lefutása után történik meg.
+        </para>
+    </section>
+    <section>
+        <title>MALMO - 5x5x5 ObservationFromGrid</title>
+        <para>Megoldás forrása:</para>
+    </section>
+
+</chapter>
