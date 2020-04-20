@@ -14,10 +14,11 @@
             nincs eltéve kiszámolt szám.
         </para>
         <para>
-            Megoldás videó:
+            Megoldás videó: Folyamatban
         </para>
         <para>
-            Megoldás forrása:                
+            Megoldás forrása:
+            <link xlink:href="Welch/Polargen">Polargen</link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat... térj ki arra is, hogy a JDK forrásaiban a Sun programozói
@@ -192,7 +193,7 @@ public class Random {		// Random osztály létrehozása
             Valósítsd meg C-ben az LZW algoritmus fa-építését!
         </para>
         <para>
-            Megoldás videó:
+            Megoldás videó: Folyamatban
         </para>
         <para>
             Megoldás forrása:                
@@ -206,7 +207,7 @@ public class Random {		// Random osztály létrehozása
             Járd be az előző (inorder bejárású) fát pre- és posztorder is!
         </para>
         <para>
-            Megoldás videó:
+            Megoldás videó: Folyamatban
         </para>
         <para>
             Megoldás forrása:                
@@ -221,7 +222,7 @@ public class Random {		// Random osztály létrehozása
             osztálya. A gyökér csomópont legyen kompozícióban a fával!
         </para>
         <para>
-            Megoldás videó:
+            Megoldás videó: Folyamatban
         </para>
         <para>
             Megoldás forrása:                
@@ -236,7 +237,7 @@ public class Random {		// Random osztály létrehozása
             fával!
         </para>
         <para>
-            Megoldás videó: 
+            Megoldás videó: Folyamatban
         </para>
         <para>
             Megoldás forrása:  
@@ -251,10 +252,11 @@ public class Random {		// Random osztály létrehozása
             értékadásra alapozva!
         </para>
         <para>
-            Megoldás videó: 
+            Megoldás videó: Folyamatban
         </para>
         <para>
-            Megoldás forrása:  
+            Megoldás forrása:
+            <link xlink:href="Welch/z3a18qa5.cpp">z3a18qa5.cpp</link>
         </para>
         <para>Ez a program egy template osztályú Objektum Orientált binfa. A template osztály a különbözô típusú bemenetek felépítése miatt van.</para>
         <para>A gyerekosztály (Node) örökli az ôsosztály (BinTree) protected értékadásait.</para>
@@ -574,7 +576,11 @@ public:
     </section>
     <section>
         <title>MALMO - 5x5x5 ObservationFromGrid</title>
-        <para>Megoldás forrása:</para>
+        <para>
+            Megoldás forrása:
+            <link xlink:href="Welch/5x5x5_neighborhood.py">5x5x5_neighborhood.py</link>
+        </para>
+
     </section>
 
 </chapter>

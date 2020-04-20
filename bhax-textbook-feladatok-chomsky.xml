@@ -15,7 +15,8 @@
             <link xlink:href="https://youtu.be/a74xsB1AMSo">YouTube</link>
         </para>
         <para>
-            Megoldás forrása:                
+            Megoldás forrása:
+            <link xlink:href="Chomsky/decToUnary.cpp">decToUnary.cpp</link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -120,7 +121,7 @@ int main(){
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="https://github.com/gergelyn/Prog1/blob/master/hivatkozasc89.c">GitHub</link>
+            <link xlink:href="Chomsky/hivatkozasc89.c">hivatkozasc89.c</link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -191,9 +192,7 @@ int main()
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="Chomsky/realnumber.l">
-                <filename>bhax/thematic_tutorials/bhax_textbook_IgyNeveldaProgramozod/Chomsky/realnumber.l</filename>
-            </link>
+            <link xlink:href="Chomsky/realnumber.l">realnumber.l</link>
         </para>
         <programlisting language="c">
             <![CDATA[%{
@@ -233,8 +232,7 @@ main ()
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="Chomsky/l337d1c7.l">
-                <filename>bhax/thematic_tutorials/bhax_textbook_IgyNeveldaProgramozod/Chomsky/l337d1c7.l</filename>
+            <link xlink:href="Chomsky/l337d1c7.l">l337d1c7.l
             </link>
         </para>
         <programlisting language="c">
@@ -584,13 +582,12 @@ $(\exists y \forall x (y<x) \supset \neg (x \text{ prím}))$
             érdemes a
             <command>typedef</command>
             használata:
-            <link xlink:href="Chomsky/fptr.c">
-                <filename>bhax/thematic_tutorials/bhax_textbook_IgyNeveldaProgramozod/Chomsky/fptr.c</filename>
+            <link xlink:href="Chomsky/typedef1.c">
+                typedef1.c
             </link>
             ,
-            <link xlink:href="Chomsky/fptr2.c">
-                <filename>bhax/thematic_tutorials/bhax_textbook_IgyNeveldaProgramozod/Chomsky/fptr2.c</filename>
-                .
+            <link xlink:href="Chomsky/typedef2.c">
+                typedef2.c
             </link>
 
         </para>
@@ -691,7 +688,7 @@ main ()
         <title>MALMO Diszkret</title>
         <para>
             Megoldás forrása:
-            <link xlink:href="">Github</link>
+            <link xlink:href="Chomsky/diszkretcsiga.py">diszkretcsiga.py</link>
         </para>
         <para>
             Megoldás videó:

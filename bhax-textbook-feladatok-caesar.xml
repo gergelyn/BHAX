@@ -24,8 +24,7 @@
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="Caesar/tm.c">
-                <filename>bhax/thematic_tutorials/bhax_textbook_IgyNeveldaProgramozod/Caesar/tm.c</filename>
+            <link xlink:href="Caesar/tm.c">tm.c
             </link>
         </para>
         <para>A program egy alsó háromszögmátrixot fog létrehozni. Az nr (number of rows) a mátrix
@@ -112,7 +111,7 @@ int main ()
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="https://regi.tankonyvtar.hu/hu/tartalom/tamop412A/2011-0063_01_parhuzamos_prog_linux/ch05s02.html?fbclid=IwAR0Ob3YIHBHHRixo0g2_qYixTp93dzHlOPJe_FbqkCmIxXpFE38uxjFClzg" />
+            <link xlink:href="Caesar/exorClean.c">exorClean.c</link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -177,7 +176,7 @@ strncpy (kulcs, argv[1], MAX_KULCS);</programlisting>
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/ch01.html#exor_titkosito">https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/ch01.html#exor_titkosito</link>
+            <link xlink:href="Caesar/ExorTitkosító.java">ExortTitkosító.java</link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -238,7 +237,6 @@ strncpy (kulcs, argv[1], MAX_KULCS);</programlisting>
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="https://gitlab.com/misi1201/bhax/-/blob/master/thematic_tutorials/Caesar%20feladatok/t.c" />
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -369,7 +367,7 @@ return 0;
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/NN_R">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/NN_R</link>
+            <link xlink:href="Caesar/nn.r">nn.r</link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -463,7 +461,7 @@ compute(nn.exor, exor.data[,1:2])</programlisting>
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="https://github.com/nbatfai/nahshon/blob/master/ql.hpp#L64">https://github.com/nbatfai/nahshon/blob/master/ql.hpp#L64</link>
+            <link xlink:href="Caesar/ql.hpp">ql.hpp</link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -479,44 +477,47 @@ compute(nn.exor, exor.data[,1:2])</programlisting>
             a perceptront, mint függvényt használjuk az eredmény értékadásánál. A program végén a
             delete függvényekkel szabadítjuk fel a pointerek és a kép által lefoglalt
             memóriát.</para>
-        <programlisting>#include &lt;iostream>
+        <programlisting>
+            <![CDATA[ 
+#include &lt;iostream>
 #include "mlp.hpp"{
 #include &lt;png++/png.hpp>
 
 int main(int argc, char **argv){
-png::image &lt;png::rgb_pixel> png_image (argv[1]);
-	
-int size = png_image.get_width()*png_image.get_height();
+    png::image &lt;png::rgb_pixel> png_image (argv[1]);
+    
+    int size = png_image.get_width()*png_image.get_height();
 
-Perceptron *p = new Perceptron(3, size, 256, 1);
+    Perceptron *p = new Perceptron(3, size, 256, 1);
 
-double* image = new double[size];
+    double* image = new double[size];
 
-for(int i(0);i&lt;png_image.get_width(); ++i)
-	for(int j(0);j&lt;png_image.get_height(); ++j)
-		image[i*png_image.get_width()+j] = png_image[i][j].red;
+    for(int i(0);i&lt;png_image.get_width(); ++i)
+        for(int j(0);j&lt;png_image.get_height(); ++j)
+            image[i*png_image.get_width()+j] = png_image[i][j].red;
 
 
-double value = (*p)(image);
+    double value = (*p)(image);
 
-std::cout&lt;&lt; value &lt;&lt; std::endl;
+    std::cout&lt;&lt; value &lt;&lt; std::endl;    
 
-	
-
-delete p;
-delete [] image;
+    delete p;
+    delete [] image;
 }
+            ]]>
+
         </programlisting>
     </section>
     <section>
-        <title>MALMO</title>
-        <para>
-            Megoldás forrása:
-            <link xlink:href="">Github</link>
-        </para>
+        <title>Vörös Pipacs Pokol/írd ki, mit lát Steve</title>
         <para>
             Megoldás videó:
-            <link xlink:href="https://youtu.be/1FaijgwIiwk">YouTube</link>
+            <link xlink:href="https://www.youtube.com/watch?v=kQamyRNHTeo">YouTube</link>
+        </para>
+        <para>
+            Megoldás forrása:
+            <link xlink:href="Caesar/rfh_third_circle.cpp">rfh_third_circle.cpp</link>
         </para>
     </section>
+
 </chapter>

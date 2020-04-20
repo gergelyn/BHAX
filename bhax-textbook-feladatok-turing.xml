@@ -274,7 +274,7 @@ false]]>
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="https://github.com/gergelyn/Prog1/blob/master/cserekulonbseg.c">GitHub</link>
+            <link xlink:href="Turing/cserekulonbseg.c">cserekulonbseg.c</link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -315,9 +315,9 @@ int main()
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="https://github.com/gergelyn/Prog1/blob/master/labdaif.c">if-ekkel C-ben</link>
+            <link xlink:href="Turing/labdaif.c">if-ekkel C-ben</link>
             ,
-            <link xlink:href="https://github.com/gergelyn/Prog1/blob/master/labdaifnelkul.c">if nélkül C-ben</link>
+            <link xlink:href="Turing/labdaifnelkul.c">if nélkül C-ben</link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -470,7 +470,7 @@ int main(void)
         <para>
             Megoldás forrása:
             <link xlink:href="Turing/bogomips.c">
-                <filename>bhax/thematic_tutorials/bhax_textbook_IgyNeveldaProgramozod/Turing/bogomips.c</filename>
+                bogomips.c
             </link>
         </para>
         <para>
@@ -559,7 +559,7 @@ System Windows 10 Pro v1903 build18362.657
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href=""></link>
+            <link xlink:href="Turing/pagerank.c">pagerank.c</link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -669,7 +669,7 @@ int main()
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/MontyHall_R">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/MontyHall_R</link>
+            <link xlink:href="Turing/montyhall.r">montyhall.r</link>
         </para>
         <para>
             A Monti Hall probléma egy paradoxon, amely azt feltételezi, hogy az első választásnál 1/3 az esély, hogy jól választunk, majd az ajtó kinyílik és felkínálják a második választás lehetőségét, ahol már 2/3 esélye annak, hogy a kívánt nyeremény van az ajtó mögött. Az alábbi R program ezt a paradoxont próbálja szimulálni egy nagy terjedelmű, véletlen generált választások sorozatával, ahol a második körben változtattak és ahol nem változtattak. Ennek az eredménye az, hogy érdemes váltani. A programban megadjuk, hogy hány próbálkozást szeretnénk (minél nagyobb számot adunk, annál pontosabb lesz az eredmény). Létrehozunk benne egy játékost aki a döntéseket végzi és egy műsorvezetőt, aki megpróbálja elbizonytalanítani a játékosunkat. Ezt követően megnézzük, hogy ha nem változtat hányszor nyer és ha változtat úgy hányszor nyer. Következmény képp kiderül, hogy ha elsőre eltaláljuk és nyerni akarunk, akkor nem kell változtatnunk. Viszont ennek az esélye 1/3. Azaz jobban járunk, ha mindig változtatunk, mivel 2/3 az esélye annak, hogz nem találjuk el elsőre a kívánt ajtót, ami mögött a nyeremény van.
@@ -1018,7 +1018,7 @@ plot(x,y,type="b")]]>
         <title>MALMO Csiga</title>
         <para>
             Megoldás forrása:
-            <link xlink:href="">Github</link>
+            <link xlink:href="Turing/csiga.py">csiga.py</link>
         </para>
         <para>
             Megoldás videó:

@@ -17,7 +17,7 @@
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href=""></link>
+            <link xlink:href="Conway/Hangyaszimulator">Hangyaszimulator</link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -353,11 +353,11 @@ public slots:
             valósítsa meg a sikló-kilövőt!
         </para>
         <para>
-            Megoldás videó: 
+            Megoldás videó: Folyamatban
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href=""></link>
+            <link xlink:href="Conway/Eletjatek_Java"></link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -773,11 +773,11 @@ public class Sejtautomata extends java.awt.Frame implements Runnable {
             Most Qt C++-ban!
         </para>
         <para>
-            Megoldás videó: 
+            Megoldás videó: Folyamatban
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href=""></link>
+            <link xlink:href="Conway/Eletjatek_C++"></link>
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
@@ -828,7 +828,7 @@ make Sejtauto
     <section>
         <title>BrainB Benchmark</title>
         <para>
-            Megoldás videó: 
+            Megoldás videó: Folyamatban
         </para>
         <para>
             Megoldás forrása:
@@ -872,8 +872,16 @@ make Sejtauto
         </itemizedlist>
     </section>
     <section>
-        <title>MALMÖ</title>
-        <para>Folyamatban</para>
+        <title>Vörös Pipacs Pokol/19 RF</title>
+        <para>
+            Megoldás forrása:
+            <link xlink:href="Conway/greenpill_mod_30rf.py">greenpill_mod_30rf.py</link>
+        </para>
+        <para>
+            Megoldás videó:
+            <link xlink:href="">YouTube</link>
+        </para>
     </section>
+
 
 </chapter>

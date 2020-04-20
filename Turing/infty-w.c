@@ -1,8 +1,8 @@
 #include <stdbool.h>
-int
-main ()
+int main()
 {
-  while(true);
+  while (true)
+    ;
 
   return 0;
 }

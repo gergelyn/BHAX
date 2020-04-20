@@ -16,8 +16,7 @@
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="../../../bhax/attention_raising/CUDA/mandelpngt.c++">
-                <filename>bhax/attention_raising/CUDA/mandelpngt.c++</filename>
+            <link xlink:href="Mandelbrot/mandel.cpp">mandel.cpp
             </link>
             nevű állománya.
         </para>
@@ -141,7 +140,8 @@
             <link xlink:href="https://youtu.be/462MXZzUle0">YouTube</link>
         </para>
         <para>
-            Megoldás forrása:                
+            Megoldás forrása:
+            <link xlink:href="Mandelbrot/5.2.cpp">5.2.cpp</link>
         </para>
         <para>        
             A program az előző algoritmus alapján számítja ki és rajzolja meg a Mandelbrot halmazt. Szükségünk van a png++ és a complex könyvtárakra. Futtatásnál deklaráljuk a létrehozandó kép szélességét magasságát és iterációs határát.
@@ -277,7 +277,7 @@ main ( int argc, char *argv[] )
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/Biomorf">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/Biomorf</link>
+            <link xlink:href="Mandelbrot/biomorf.cpp">biomorf.cpp</link>
         </para>
         <para>
             A biomorfokra (a Julia halmazokat rajzoló bug-os programjával) 
@@ -481,8 +481,8 @@ main ( int argc, char *argv[] )
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="../../../bhax/attention_raising/CUDA/mandelpngc_60x60_100.cu">
-                <filename>bhax/attention_raising/CUDA/mandelpngc_60x60_100.cu</filename>
+            <link xlink:href="Mandelbrot/mandelpngc_60x60_100.cu">
+               mandelpngc_60x60_100.cu
             </link>
             nevű állománya.
         </para>
@@ -571,7 +571,7 @@ cudamandel (int kepadat[MERET][MERET])
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href=""></link>
+            <link xlink:href="Mandelbrot/MandelbrotNagyito">MandelbrotNagyito</link>
         </para>
         <para>
             A GUI QT-ban van megírva, hogy Cross-Platformos legyen.
@@ -826,7 +826,7 @@ cudamandel (int kepadat[MERET][MERET])
         </para>
         <para>
             Megoldás forrása:
-            <link xlink:href="https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/apbs02.html#id570518">https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/apbs02.html#id570518</link>
+            <link xlink:href="Mandelbrot/MandelbrotHalmaz.java">MandelbrotHalmaz.java</link>
         </para>
         <programlisting>
             <![CDATA[
@@ -1039,7 +1039,7 @@ public class MandelbrotHalmazNagyito extends MandelbrotHalmaz {
         <title>MALMO</title>
         <para>
             Megoldás forrása:
-            <link xlink:href="">Github</link>
+            <link xlink:href="Mandelbrot/greenpill_mod_30rf.py">greenpill_mod_30rf.py</link>
         </para>
         <para>
             Megoldás videó:
