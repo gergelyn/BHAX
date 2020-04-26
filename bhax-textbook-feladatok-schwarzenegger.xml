@@ -143,6 +143,18 @@ $ python mnist1.py
             <link xlink:href="https://gitlab.com/rbesenczi/bhax/-/blob/master/thematic_tutorials/Schwarzenegger/MNIST/mnist1.py">Besenczi Renátó GitLab</link>
             oldaláról származik
         </para>
+        <para>Végül rájöttem, hogy az importálások utáni elsô 3 sor törlésével ignorálhatom azt, hogy kötelezzen GPU-ra (Uno Reverse Card), tehát lefuttattam egy 7-esrôl készült kép beolvasásával, amire végül 7-est írt, tehát mûködött.</para>
+        <figure>
+            <title>Az mnist_cnn.py futtatásának eredménye a Macbook-omon</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/mnist_cnn.png" scale="50" />
+                </imageobject>
+                <textobject>
+                    <phrase>Az mnist_cnn.py futtatásának eredménye a Macbook-omon</phrase>
+                </textobject>
+            </mediaobject>
+        </figure>
         <para>A program felépítése: </para>
         <programlisting>
             <![CDATA[ 
