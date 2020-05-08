@@ -176,7 +176,7 @@
             
             ;(text-width "alma" "Sans" 100)
 
-            ; Itt a kép létrehozása és a rétegek létrehozása történik
+            ; Itt a kép létrehozása és a rétegek létrehozása történik a kròm effekthez, amihez kell a szöveg, betûméret, szín, átmenet, szélesség, magasság.
             (define (script-fu-bhax-chrome text font fontsize width height color gradient)
             (let*
                 (
@@ -346,7 +346,7 @@
             
             ;(text-width "alma" "Sans" 100)
             
-            ; Itt készülnek el a rétegek, a méretezés és a transzformációk a mandala kirajzolásához
+            ; Itt készülnek el a rétegek, a méretezés és a transzformációk a mandala kirajzolásához, 8 paraméter kell hozzá a betûméret, a típus, a szín, a szélesség, a magasság, az átmenet, a szöveg és, hogy középen legyen
             (define (script-fu-bhax-mandala text text2 font fontsize width height color gradient)
             (let*
                 (
