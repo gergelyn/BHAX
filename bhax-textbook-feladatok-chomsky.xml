@@ -21,14 +21,23 @@
         <para>
             Tanulságok, tapasztalatok, magyarázat...
         </para>
+        <figure>
+            <title>A Turing-gép állapotmenet gráfja (Forrás: Az elôadás fólia)</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/allapotmenet.png" scale="50" />
+                </imageobject>
+                <textobject>
+                    <phrase>A Turing-gép állapotmenet gráfja (Forrás: Az elôadás fólia)</phrase>
+                </textobject>
+            </mediaobject>
+        </figure>
         <para>
-            A turing gép bemenetként egy decimális számot 
-            kap, és a kimenete egyesekből fog állni. A decimális szám nagyságától függ az, hogy
-            mennyi egyest fogunk kapni a kimenetben. Például a 2 (decimális szám) az unáris
-            rendszerben 11, vagy az 5 az egyenlô 11111. Alapvetően a Turing gépeken végzett
-            műveletek által balra vagy jobbra haladunk a memóriaszalagon és átmegyünk a következő
-            állapotra. A gép részei még az író-olvasó fej, illetve a vezérlőegység.
+            Mûködése (Forrás:
+            <link xlink:href="https://hu.wikipedia.org/wiki/Turing-g%C3%A9p">Wikipédia</link>
+            )
         </para>
+        <para>A Turing-gépnek minden időben van egy aktuális pozíciója a memóriaszalagon, amely pozíciónál az aktuális cella helyezkedik el. Minden időben van egy állapota, amely az aktuális állapot. Az aktuális állapotok definiálása része a gép programozásának. Az időbeli lefutást leírva a gép beolvas, változtat, mozog, és aztán ez a ciklus újra kezdődik: azon a cellán, amelyre mozgott, ismét beolvas, változtat, majd lép.</para>
         <para>
             Az alábbi kódban megkérjük a felhasználót, hogy adjon meg egy
             decimális számot, amit egy változóban fogunk eltárolni. Ezt a változót bementként
@@ -420,26 +429,103 @@ main()
             Ha az átirányított SIGINT SIG_IGN -re nem egyenlő SIG_IGN -nel, akkor legyen átirányítva a jelkezelőre.
         </para>
         <para>
-            Pre-incremet for ciklus, amely kiírja a számokat 0-tól 4-ig.
+            Pre-increment for ciklus, amely kiírja a számokat 0-tól 4-ig. A pre-increment lényege, hogy elôbb megnöveljük az i értékét 1-gyel és utána adjuk át az értéket.
         </para>
+        <figure>
+            <title>Pre-Increment For ciklus</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/fejezet362.png" scale="50" />
+                </imageobject>
+                <textobject>
+                    <phrase>Pre-Increment For ciklus</phrase>
+                </textobject>
+            </mediaobject>
+        </figure>
         <para>
-            Post-increment for ciklus, amely kiírja a számokat 0-tól 4-ig.
+            Post-increment for ciklus, amely kiírja a számokat 0-tól 4-ig. A post-increment lényege, hogy az érték átadás után növeljük az i értékét 1-gyel.
         </para>
+        <figure>
+            <title>Post-Increment For ciklus</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/fejezet363.png" scale="50" />
+                </imageobject>
+                <textobject>
+                    <phrase>Post-Increment For ciklus</phrase>
+                </textobject>
+            </mediaobject>
+        </figure>
         <para>
-            Post-increment for ciklus, amely a tomb i-edik elemét növeli 1-gyel és kiírja 0-tól 4-ig a számokat.
+            Post-increment for ciklus, amely a tomb i-edik eleméhez rendeli  i+1-gyel. A probléma, hogy az elsô körben nincs a tomb-nek tagja, így 0 lesz, és egy random számot kapunk, ami egy memóriaszemét.
         </para>
+        <figure>
+            <title>Post-Increment For ciklus tomb[i]-edik elemével</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/fejezet364.png" scale="50" />
+                </imageobject>
+                <textobject>
+                    <phrase>Pre-Increment For ciklus</phrase>
+                </textobject>
+            </mediaobject>
+        </figure>
         <para>
-            Pre-increment for ciklus n-ig ÉS a két mutatónak ugyanaz legyen az értéke.
+            Pre-increment for ciklus. A ciklus futását úgy kell biztosítani, hogy i kisebb mint n, ÉS a két mutatónak ugyanaz legyen az értéke ha növeljük ôket 1-gyel.
         </para>
+        <figure>
+            <title>Kép a futásról</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/fejezet365.png" scale="50" />
+                </imageobject>
+                <textobject>
+                    <phrase>Kép a futásról</phrase>
+                </textobject>
+            </mediaobject>
+        </figure>
         <para>
-            Printel két decimális számot, amelyeket az f függvénynek ad vissza.
+            Printel két decimális számot, amelyek az f függvénynek a visszatérési értékei. Az elsônél az f függvény 1. paramétere az a, 2. paramétere a ++a, tehát a+1. A másodiknál az 1. paramétere az f függvénynek a ++a, tehát az a+1, a 2. paramétere az a.
         </para>
+        <figure>
+            <title>Kép a futásról</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/fejezet366.png" scale="50" />
+                </imageobject>
+                <textobject>
+                    <phrase>Kép a futásról</phrase>
+                </textobject>
+            </mediaobject>
+        </figure>
         <para>
-            Printel két decimális számot, amelyből az egyik a függvénytől kapott szám, másik az érték.
+            Printel két decimális számot, amelyből az egyik a függvénytől kapott szám, másik az adott érték, az a.
         </para>
+        <figure>
+            <title>Kép a futásról</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/fejezet367.png" scale="50" />
+                </imageobject>
+                <textobject>
+                    <phrase>Kép a futásról</phrase>
+                </textobject>
+            </mediaobject>
+        </figure>
         <para>
-            Printel két decimális számot, amelyből az egyik a függvénynek adott referencia, a másik az alap érték.
+            Printel két decimális számot. Az f függvény visszatérési értéket, amely az a változónak a memóriacímét, tehát referenciáját adjuk paraméterként, a másik szám maga az a változó.
         </para>
+        <figure>
+            <title>Kép a futásról</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="img/fejezet368.png" scale="50" />
+                </imageobject>
+                <textobject>
+                    <phrase>Kép a futásról</phrase>
+                </textobject>
+            </mediaobject>
+        </figure>
     </section>
 
     <section>
@@ -473,6 +559,20 @@ $(\exists y \forall x (y<x) \supset \neg (x \text{ prím}))$
         </para>
         <para>
             Létezik y, minden x y kisebb mint x és ebből nem következik, hogy x prím
+        </para>
+        <para>
+            A generált PDF:
+            <link xlink:href="Chomsky/matlog.pdf">matlog.pdf</link>
+        </para>
+        <para>A matlog.tex LaTeX fileból való matlog.pdf PDF file generálása</para>
+        <programlisting>
+            <![CDATA[ 
+pdflatex [filename].tex
+            ]]>
+        </programlisting>
+        <para>
+            Ahol rábukkantam:
+            <link xlink:href="https://guides.lib.wayne.edu/latex/compiling">Weboldal címe</link>
         </para>
     </section>
 
@@ -553,22 +653,22 @@ $(\exists y \forall x (y<x) \supset \neg (x \text{ prím}))$
             </listitem>
             <listitem>
                 <programlisting>
-                    <![CDATA[int *h ();]]>
+                    <![CDATA[int *h (); // egészre mutató mutatót visszaadó függvény]]>
                 </programlisting>
             </listitem>
             <listitem>
                 <programlisting>
-                    <![CDATA[int *(*l) ();]]>
+                    <![CDATA[int *(*l) (); // egészre mutató mutatót visszaadó függvényre mutató mutató]]>
                 </programlisting>
             </listitem>
             <listitem>
                 <programlisting>
-                    <![CDATA[int (*v (int c)) (int a, int b)]]>
+                    <![CDATA[int (*v (int c)) (int a, int b) // egészet visszaadó és két egészet kapó függvényre]]>
                 </programlisting>
             </listitem>
             <listitem>
                 <programlisting>
-                    <![CDATA[int (*(*z) (int)) (int, int);]]>
+                    <![CDATA[int (*(*z) (int)) (int, int); // függvénymutató egy egészet visszaadó és két egészet kapó függvényre]]>
                 </programlisting>
             </listitem>
         </itemizedlist>
